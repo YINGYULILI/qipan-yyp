@@ -1,0 +1,58 @@
+@import "var";
+@import "mixin";
+
+//动画
+@keyframes donghua{
+    from{
+        transform: translate(-2000px,0);      
+    }
+    to{
+        transform: translate(0,0);   
+    }
+}
+@keyframes donghua2{
+    from{
+        transform: translate(0,-2000px);      
+    }
+    to{
+        transform: translate(0,0);   
+    }
+}
+.box{
+    width: $width;
+    height: $width;
+    @include position_center;//居中的
+    border: 1px solid #333;
+    >span.item{
+        width: $width - $radius*2;
+        height: 1px;
+        background: red;
+        position: absolute;
+        left: $radius;
+        transform: translate(-2000px,0);      
+        animation: donghua 1s ease 1 forwards;//执行动画完成之后
+    }
+    @for $i from 1 through 20{
+        >span:nth-of-type(#{$i}){
+            top:(2 * $i - 1) * $radius;
+            animation-delay: $i * 100ms;
+        };
+    }
+
+    >i.item2{
+        height: $width - $radius*2;
+        width: 1px;
+        background: red;
+        position: absolute;
+        top: $radius;
+        transform: translate(0,-2000px);      
+        animation: donghua2 1s ease 1 forwards;//执行动画完成之后
+    }
+    @for $i from 1 through 20{
+        >i:nth-of-type(#{$i}){
+            left:(2 * $i - 1) * $radius;
+            animation-delay: $i * 100ms;
+        };
+    }
+}
+
